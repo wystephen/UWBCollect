@@ -9,7 +9,7 @@ import re
 
 import numpy as np
 
-
+import matplotlib.pyplot as plt
 import array
 
 class UwbDataPre:
@@ -18,7 +18,7 @@ class UwbDataPre:
 
         self.start_time = 0.0
 
-        self.tmp_array = array.array('f')
+        self.tmp_array = array.array('d')
 
         for file in os.listdir(dir_name):
             print(file)
@@ -68,12 +68,17 @@ class UwbDataPre:
                             self.tmp_array.append(float(line.split(' ')[5]))
 
 
-        self.result_uwb = np.frombuffer(self.tmp_array,dtype=np.float32).reshape([-1,5])
+        self.result_uwb = np.frombuffer(self.tmp_array,dtype=np.float).reshape([-1,5])
 
         print(self.result_uwb)
 
+
         np.savetxt(dir_name+"uwb_result.csv",self.result_uwb,delimiter=',')
 
+
+        plt.figure()
+        plt.plot(self.result_uwb[:,0],'r')
+        plt.show()
 
 
 
@@ -87,8 +92,6 @@ class UwbDataPre:
 
 
 
-
-
 if __name__ == '__main__':
-    udp = UwbDataPre("/home/steve/Data/FastUwbDemo/1/")
+    udp = UwbDataPre("/home/steve/Data/FastUwbDemo/2/")
 
