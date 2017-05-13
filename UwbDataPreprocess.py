@@ -50,7 +50,13 @@ class UwbDataPre:
         this_file.close()
         this_file=open(self.file_name)
 
+        is_first_line = True
+
         for line in this_file.readlines():
+            if is_first_line:
+                self.start_time -= float(line[1:10])
+                is_first_line=False
+
             if line.split(' ')[2] == '@R':
                 print(line)
                 if line.split(' ')[3] != 'F1':
@@ -79,12 +85,6 @@ class UwbDataPre:
         plt.figure()
         plt.plot(self.result_uwb[:,0],'r')
         plt.show()
-
-
-
-
-
-
 
         # self.start_time
 
