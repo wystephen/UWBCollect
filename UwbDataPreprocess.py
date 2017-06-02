@@ -55,6 +55,7 @@ class UwbDataPre:
         for line in this_file.readlines():
             if is_first_line:
                 self.start_time -= float(line[1:10])
+                print("start time :",float(line[1:10]))
                 is_first_line=False
 
             if line.split(' ')[2] == '@R':
@@ -66,24 +67,33 @@ class UwbDataPre:
                     print("time : ", float(self.start_time + float(line[1:10])))
                     for i in range(len(mac_list)):
 
-
-
                         if mac_name != mac_list[i]:
                             self.tmp_array.append(-10.0)
                         else:
                             self.tmp_array.append(float(line.split(' ')[5]))
 
 
-        self.result_uwb = np.frombuffer(self.tmp_array,dtype=np.float).reshape([-1,5])
+        print('len mac list:',len(mac_list))
+        self.result_uwb = np.frombuffer(self.tmp_array,dtype=np.float).reshape([-1,len(mac_list)+1])
 
         print(self.result_uwb)
 
+        # self.result_uwb[150:320,1:] -=100.0
+        # self.result_uwb[:,1] -=100.0
+        # self.result_uwb[:,2] -=100.0
+        # self.result_uwb[:,4]  -= 100.0
 
-        np.savetxt(dir_name+"uwb_result.csv",self.result_uwb,delimiter=',')
+        np.savetxt(dir_name+"uwb_result.csv",self.result_uwb,'%.4f',delimiter=',')
 
 
         plt.figure()
         plt.plot(self.result_uwb[:,0],'r')
+
+
+        plt.figure()
+        plt.title('uwb ')
+        for i in range(1,self.result_uwb.shape[1]):
+            plt.plot(self.result_uwb[:,i],'*')
         plt.show()
 
         # self.start_time
@@ -92,6 +102,8 @@ class UwbDataPre:
 
 
 
+
 if __name__ == '__main__':
-    udp = UwbDataPre("/home/steve/Data/FastUwbDemo/2/")
+    # udp = UwbDataPre("/home/steve/Data/NewRecord/Record2/")
+    udp = UwbDataPre("/home/steve/tmp/test/44/")
 

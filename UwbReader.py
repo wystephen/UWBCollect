@@ -23,10 +23,10 @@ class UwbReader:
 if __name__ == '__main__':
     start_time = time.time()
     print(start_time)
-    save_source_file = open("./" + str(start_time) + "_uwbdata.txt", 'wb')
 
+    t = serial.Serial('/dev/ttyUSB0', 115200)
     # print(time.strftime("%Y-%m-%d", start_time))
-    t = serial.Serial('com3', 115200)
+    save_source_file = open("./" + str(start_time) + "_uwbdata.txt", 'wb')
     while (t.isOpen()):
         data = t.readline()
         print(data)
