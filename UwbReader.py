@@ -8,7 +8,7 @@ import time
 class UwbReader:
     def __init__(self, dev_name, save_file_name):
         self.save_source_file = open(save_file_name, 'wb')
-        t = serial.Serial(dev_name,115200);
+        t = serial.Serial(dev_name,115200)
         while(t.is_open()):
             data = t.readline()
             print(data)

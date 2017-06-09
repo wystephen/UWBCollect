@@ -18,6 +18,8 @@ class UwbDataPre:
 
         self.start_time = 0.0
 
+        
+        
         self.tmp_array = array.array('d')
 
         for file in os.listdir(dir_name):
