@@ -105,5 +105,7 @@ class UwbDataPre:
 
 if __name__ == '__main__':
     # udp = UwbDataPre("/home/steve/Data/NewRecord/Record2/")
-    udp = UwbDataPre("/home/steve/tmp/test/44/")
+    # udp = UwbDataPre("/home/steve/tmp/test/44/")
+    udp = UwbDataPre("/home/steve/Code/Mini-IMU/Scripts/IMUWB/46/")
+
 
