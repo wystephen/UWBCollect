@@ -126,18 +126,19 @@ class UwbDataPre:
                     index_list .append(j)
 
             # Main filter process
-            step_len = 2
+            step_len = 5
             tmp_value_list = list()
             for index in range(step_len,len(index_list)-step_len):
                 if abs((self.result_uwb[index_list[index-step_len],i]+
                             self.result_uwb[index_list[index+step_len],i])
-                       -2.0* self.result_uwb[index_list[index],i]) > 0.12:
-                    print(abs((self.result_uwb[index_list[index-step_len],i]+
-                            self.result_uwb[index_list[index+step_len],i])
-                       -2.0* self.result_uwb[index_list[index],i]) )
+                       -2.0* self.result_uwb[index_list[index],i]) > 1.92:
+                    # print(abs((self.result_uwb[index_list[index-step_len],i]+
+                    #         self.result_uwb[index_list[index+step_len],i])
+                    #    -2.0* self.result_uwb[index_list[index],i]) )
                     tmp_value_list.append(-10.0)
                 else:
                     tmp_value_list.append(self.result_uwb[index_list[index],i])
+
 
 
 
@@ -154,12 +155,11 @@ class UwbDataPre:
 
 
 
-
 if __name__ == '__main__':
     # udp = UwbDataPre("/home/steve/Data/NewRecord/Record2/")
     # udp = UwbDataPre("/home/steve/tmp/test/44/")
-    udp = UwbDataPre("/home/steve/Code/Mini_IMU/Scripts/IMUWB/46/")
-    udp.filter()
+    udp = UwbDataPre("/home/steve/Code/Mini_IMU/Scripts/IMUWB/73/")
+    # udp.filter()
 
     udp.save()
     udp.show()
