@@ -24,7 +24,7 @@ if __name__ == '__main__':
     start_time = time.time()
     print(start_time)
 
-    t = serial.Serial('/dev/ttyUSB1', 115200)
+    t = serial.Serial('/dev/ttyUSB0', 115200)
     # print(time.strftime("%Y-%m-%d", start_time))
     save_source_file = open("./" + str(start_time) + "_uwbdata.txt", 'wb')
     while (t.isOpen()):
